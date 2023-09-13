@@ -1,0 +1,76 @@
+<div class="login-page">
+  <div *ngIf="!loading" class="body">
+    <img class="logo" src="../../assets/img/perfil.png" alt="login"  />
+    <h1>LOGIN</h1>
+    <form (ngSubmit)="login()" [formGroup]="loginusuario2">
+      <div class="input-box">
+        <i class="bx bxs-user"></i>
+        <input
+          type="text"
+          placeholder="Username"
+          formControlName="email"
+          required
+        />
+        <br />
+        <span
+          *ngIf="
+            loginusuario2.get('email')?.hasError('required') &&
+            loginusuario2.get('email')?.touched
+          "
+          class="text-danger"
+        >
+          El <strong>correo</strong> es requerido
+        </span>
+        <span
+          *ngIf="
+            loginusuario2.get('email')?.hasError('email') &&
+            loginusuario2.get('email')?.touched
+          "
+          class="text-danger"
+        >
+          El <strong>correo</strong> es invalido
+        </span>
+      </div>
+      <div class="input-box">
+        <i class="bx bxs-lock"></i>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          required
+        />
+        <br />
+        <span
+          *ngIf="
+            loginusuario2.get('password')?.hasError('required') &&
+            loginusuario2.get('password')?.touched
+          "
+          class="text-danger"
+        >
+          La <strong>contraseña</strong> es requerida
+        </span>
+        <span
+          *ngIf="
+            loginusuario2.get('password')?.hasError('minlength') &&
+            loginusuario2.get('password')?.touched
+          "
+          class="text-danger"
+        >
+          La <strong>contraseña</strong> es invalida
+        </span>
+      </div>
+      <div class="cheker">
+        <label for=""><input type="checkbox" /> Recuerdame</label>
+        <a routerLink="/recuperar-password">Olvidaste tu contraseña?</a>
+      </div>
+      <button type="submit" class="btn-login" [disabled]="loginusuario2.invalid">
+        Iniciar Session
+      </button>
+      <div class="registrar-link">
+        <p>
+          No tiene cuenta? <a routerLink="/registrar-usuario">Registrese</a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="login-page">
+  <div *ngIf="!loading" class="body">
+    <img class="logo" src="../../../assets/img/perfil.png" alt="login" />
+    <h1>Registrarse</h1>
+    <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
+      <div class="input-box">
+        <i class="bx bxs-user"></i>
+        <input
+          type="email"
+          placeholder="Username"
+          formControlName="email"
+          required
+        />
+        <br />
+        <span
+          *ngIf="
+            registrarUsuario.get('email')?.hasError('required') &&
+            registrarUsuario.get('email')?.touched
+          "
+          class="text-danger"
+        >
+          El <strong>Correo</strong> es requerido
+        </span>
+        <span
+          *ngIf="
+            registrarUsuario.get('email')?.hasError('email') &&
+            registrarUsuario.get('email')?.touched
+          "
+          class="text-danger"
+        >
+          El <strong>Correo</strong> es invalido
+        </span>
+      </div>
+      <div class="input-box">
+        <i class="bx bxs-lock"></i>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          required
+        />
+        <br />
+        <span
+          *ngIf="
+            registrarUsuario.get('password')?.hasError('required') &&
+            registrarUsuario.get('password')?.touched
+          "
+          class="text-danger"
+        >
+          La <strong>contraseña</strong> es requerida
+        </span>
+        <span
+          *ngIf="
+            registrarUsuario.get('password')?.hasError('minlength') &&
+            registrarUsuario.get('password')?.touched
+          "
+          class="text-danger"
+          >La <strong>contraseña</strong> debe tener minimo 6 caracteres</span
+        >
+      </div>
+      <div class="input-box">
+        <i class="bx bxs-lock"></i>
+        <input
+          type="password"
+          placeholder="Repetir password"
+          formControlName="repetirpassword"
+          required
+        />
+        <br />
+      </div>
+      <button
+        type="submit"
+        class="btn-login"
+        [disabled]="registrarUsuario.invalid"
+      >
+        Registrarse
+      </button>
+      <div class="back"><a routerLink="/login">Volver</a></div>
+    </form>
+  </div>
+
+</div>
